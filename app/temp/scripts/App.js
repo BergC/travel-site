@@ -129,8 +129,9 @@ var MobileMenu = function () {
     }, {
         key: "toggleTheMenu",
         value: function toggleTheMenu() {
-            this.menuContent.toggleClass("site-header__menu-content--is-visible");
+            this.menuContent.toggleClass("site-header__menu-content--is-visible"); //.toggleClass will add and/or remove a class based on some event.
             this.siteHeader.toggleClass("site-header--is-expanded");
+            this.menuIcon.toggleClass("site-header__menu-icon--close-x");
         }
     }]);
 

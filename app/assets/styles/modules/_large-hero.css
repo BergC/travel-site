@@ -7,12 +7,18 @@
     }
 
     &__text-content {
+        padding-top: 88px;
         position: absolute;
         top: 50%; /*Center text vertically. This puts the top of the text's div half way down */
         transform: translateY(-50%); /*Center text vertically. This will move content vertically based on its size and relative to its position */
         left: 0;
         width: 100%;
         text-align: center;
+
+        @mixin atMedium {
+            padding-top: 60px;
+        }
+
     }
 
     &__title {

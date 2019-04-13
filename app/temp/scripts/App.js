@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10325,173 +10325,6 @@ return jQuery;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _MobileMenu = __webpack_require__(2);
-
-var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
-
-var _RevealOnScroll = __webpack_require__(3);
-
-var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//Because we're not using jQuery in the two instances of our RevealOnScroll class, we should import it.
-
-var mobileMenu = new _MobileMenu2.default(); //This is the ES6 way of importing JS objects from other JS files.
-
-new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
-new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/*
-Classes are an ES6 introduction.  
-Here I am using the ES6 class capabilitis to create a constructor function.  
-The benefit of ES6 classes is improved inheritence when using the "extend" functionality.
-*/
-var MobileMenu = function () {
-    function MobileMenu() {
-        _classCallCheck(this, MobileMenu);
-
-        this.siteHeader = (0, _jquery2.default)(".site-header");
-        this.menuIcon = (0, _jquery2.default)(".site-header__menu-icon");
-        this.menuContent = (0, _jquery2.default)(".site-header__menu-content");
-        this.events();
-    }
-
-    //ES6 allows methods to be created without "this." and "function()".
-
-
-    _createClass(MobileMenu, [{
-        key: "events",
-        value: function events() {
-            this.menuIcon.click(this.toggleTheMenu.bind(this));
-            console.log(this);
-        }
-
-        //Rather than stringing the jQuery selection of the site header menu icon with the .click event handler and the action, it's cleaner to keep them separate and independnet of eachother.
-
-    }, {
-        key: "toggleTheMenu",
-        value: function toggleTheMenu() {
-            this.menuContent.toggleClass("site-header__menu-content--is-visible"); //.toggleClass will add and/or remove a class based on some event.
-            this.siteHeader.toggleClass("site-header--is-expanded");
-            this.menuIcon.toggleClass("site-header__menu-icon--close-x");
-        }
-    }]);
-
-    return MobileMenu;
-}();
-
-//This is the ES6 way of exporting JS objects (classes).
-
-
-exports.default = MobileMenu;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _noframework = __webpack_require__(4);
-
-var _noframework2 = _interopRequireDefault(_noframework);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-//This allows us to easily have scroll events rather than having to code exactly when the features section should reveal.
-
-var RevealOnScroll = function () {
-    //The ordering below matters.  For instance, the this.offsetPercentage needs be above the createWaypoints method so that we can access it before running createWaypoints.
-    function RevealOnScroll(els, offset) {
-        _classCallCheck(this, RevealOnScroll);
-
-        this.itemsToReveal = els;
-        this.offsetPercentage = offset;
-        this.hideInitially();
-        this.createWaypoints();
-    }
-
-    //This is used to hide the selected items initially so that they can be revealed on scroll.
-
-
-    _createClass(RevealOnScroll, [{
-        key: 'hideInitially',
-        value: function hideInitially() {
-            this.itemsToReveal.addClass("reveal-item");
-        }
-
-        /*
-        The .each() method is a jQuery ability that will run some code for each DOM element in our selection.
-        In this case our selection is the itemsToReveal, which is selecting the HTML/CSS class .feature-item, which is applied to the four features.  So it will run 4 times.
-        */
-
-    }, {
-        key: 'createWaypoints',
-        value: function createWaypoints() {
-            var that = this; //Because we want to use the offset variable included in the constructor function, we need to assign a variable to the this keyword.  We do this because if we try to access offsetPercentage below in the offset (e.g. this.offsetPercentage), the this keyword points to the Waypoint, not the constructor.
-            this.itemsToReveal.each(function () {
-                var currentItem = this; //Outside of the new element below, the this keyword still points to the DOM element.  So we set some variable to the this keyword, then access that variable inside the Waypoint.
-                new Waypoint({ //Waypoint is already included in the waypoints npm package that was installed.
-                    element: currentItem, //This is the DOM element we want to watch for as we scroll.
-                    handler: function handler() {
-                        (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
-                    }, //The handler is what we want to happen once we reach that element.
-                    offset: that.offsetPercentage //By default a waypoint handler occurs when the top of the DOM element reaches the top of the screen.  It has a default position of 0%.  So, if you want an item to reveal as it enters view (e.g. at the bottom) you can use offset, where 100% is the bottom of the page.
-                });
-            });
-        }
-    }]);
-
-    return RevealOnScroll;
-}();
-
-exports.default = RevealOnScroll;
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports) {
 
 /*!
@@ -11252,6 +11085,234 @@ https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
   Waypoint.Adapter = NoFrameworkAdapter
 }())
 ;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _MobileMenu = __webpack_require__(3);
+
+var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
+
+var _RevealOnScroll = __webpack_require__(4);
+
+var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _StickyHeader = __webpack_require__(5);
+
+var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//This is the ES6 way of importing JS objects from other JS files.
+var mobileMenu = new _MobileMenu2.default(); //Because we're not using jQuery in the two instances of our RevealOnScroll class, we should import it.
+
+new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
+new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
+var stickyHeader = new _StickyHeader2.default();
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*
+Classes are an ES6 introduction.  
+Here I am using the ES6 class capabilitis to create a constructor function.  
+The benefit of ES6 classes is improved inheritence when using the "extend" functionality.
+*/
+var MobileMenu = function () {
+    function MobileMenu() {
+        _classCallCheck(this, MobileMenu);
+
+        this.siteHeader = (0, _jquery2.default)(".site-header");
+        this.menuIcon = (0, _jquery2.default)(".site-header__menu-icon");
+        this.menuContent = (0, _jquery2.default)(".site-header__menu-content");
+        this.events();
+    }
+
+    //ES6 allows methods to be created without "this." and "function()".
+
+
+    _createClass(MobileMenu, [{
+        key: "events",
+        value: function events() {
+            this.menuIcon.click(this.toggleTheMenu.bind(this));
+            console.log(this);
+        }
+
+        //Rather than stringing the jQuery selection of the site header menu icon with the .click event handler and the action, it's cleaner to keep them separate and independnet of eachother.
+
+    }, {
+        key: "toggleTheMenu",
+        value: function toggleTheMenu() {
+            this.menuContent.toggleClass("site-header__menu-content--is-visible"); //.toggleClass will add and/or remove a class based on some event.
+            this.siteHeader.toggleClass("site-header--is-expanded");
+            this.menuIcon.toggleClass("site-header__menu-icon--close-x");
+        }
+    }]);
+
+    return MobileMenu;
+}();
+
+//This is the ES6 way of exporting JS objects (classes).
+
+
+exports.default = MobileMenu;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _noframework = __webpack_require__(1);
+
+var _noframework2 = _interopRequireDefault(_noframework);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//This allows us to easily have scroll events rather than having to code exactly when the features section should reveal.
+
+var RevealOnScroll = function () {
+    //The ordering below matters.  For instance, the this.offsetPercentage needs be above the createWaypoints method so that we can access it before running createWaypoints.
+    function RevealOnScroll(els, offset) {
+        _classCallCheck(this, RevealOnScroll);
+
+        this.itemsToReveal = els;
+        this.offsetPercentage = offset;
+        this.hideInitially();
+        this.createWaypoints();
+    }
+
+    //This is used to hide the selected items initially so that they can be revealed on scroll.
+
+
+    _createClass(RevealOnScroll, [{
+        key: 'hideInitially',
+        value: function hideInitially() {
+            this.itemsToReveal.addClass("reveal-item");
+        }
+
+        /*
+        The .each() method is a jQuery ability that will run some code for each DOM element in our selection.
+        In this case our selection is the itemsToReveal, which is selecting the HTML/CSS class .feature-item, which is applied to the four features.  So it will run 4 times.
+        */
+
+    }, {
+        key: 'createWaypoints',
+        value: function createWaypoints() {
+            var that = this; //Because we want to use the offset variable included in the constructor function, we need to assign a variable to the this keyword.  We do this because if we try to access offsetPercentage below in the offset (e.g. this.offsetPercentage), the this keyword points to the Waypoint, not the constructor.
+            this.itemsToReveal.each(function () {
+                var currentItem = this; //Outside of the new element below, the this keyword still points to the DOM element.  So we set some variable to the this keyword, then access that variable inside the Waypoint.
+                new Waypoint({ //Waypoint is already included in the waypoints npm package that was installed.
+                    element: currentItem, //This is the DOM element we want to watch for as we scroll.
+                    handler: function handler() {
+                        (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
+                    }, //The handler is what we want to happen once we reach that element.
+                    offset: that.offsetPercentage //By default a waypoint handler occurs when the top of the DOM element reaches the top of the screen.  It has a default position of 0%.  So, if you want an item to reveal as it enters view (e.g. at the bottom) you can use offset, where 100% is the bottom of the page.
+                });
+            });
+        }
+    }]);
+
+    return RevealOnScroll;
+}();
+
+exports.default = RevealOnScroll;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _noframework = __webpack_require__(1);
+
+var _noframework2 = _interopRequireDefault(_noframework);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var StickyHeader = function () {
+    function StickyHeader() {
+        _classCallCheck(this, StickyHeader);
+
+        this.siteHeader = (0, _jquery2.default)(".site-header");
+        this.headerTriggerElement = (0, _jquery2.default)(".large-hero__title");
+        this.createHeaderWaypoint(); //We call the createHeaderWaypoint in our constructor so that it's created as soon as the page loads.
+    }
+
+    _createClass(StickyHeader, [{
+        key: 'createHeaderWaypoint',
+        value: function createHeaderWaypoint() {
+            var that = this; //In this instance, the this keyword is now pointing to the instance of our class.
+            new Waypoint({
+                element: this.headerTriggerElement[0], //Waypoing is expected a JS native DOM element.  Without the [0], you're just passing it a jQuery object.  You can access the native DOM element within a jQuery element by adding [0].  This is because the first item in a jQuery array-like object is a pointer to the native DOM element.
+                handler: function handler(direction) {
+                    //Handler's function can take an argument "direction" so that if we scroll back up to the top, our change to the header color will revert.
+                    if (direction == "down") {
+                        that.siteHeader.addClass("site-header--dark"); //Given we're writing a function insided Waypoint, we can't use this, as it won't point to our class.  So we use the that variable, which is pointing to the class.
+                    } else {
+                        that.siteHeader.removeClass("site-header--dark");
+                    }
+                }
+            });
+        }
+    }]);
+
+    return StickyHeader;
+}();
+
+exports.default = StickyHeader;
 
 /***/ })
 /******/ ]);

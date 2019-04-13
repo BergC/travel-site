@@ -11,6 +11,12 @@
 
     @mixin atMedium {
         background-color: rgba($mainBlue, 0.3);
+        position: fixed; /*This locks the header to the top of the screen while we scroll only for larger screens.*/
+
+        &--dark {
+            background-color: rgba(23, 51, 72, 0.85);
+        }
+
     }
 
     &__btn-container {
@@ -28,10 +34,16 @@
         left: 50%;
         transform: translateX(-50%) scale(0.8);
         transform-origin: 50% 0%;
+        transition: transform 0.3s ease-out;
 
         @mixin atMedium {
             left: auto;
             transform: translateX(0);
+
+            /*By using the & symbol AFTER our .site-header--dark class, we're saying that only when the --dark modifier class is active, select the __logo and apply this CSS.*/
+            .site-header--dark & {
+                transform: scale(.57);
+            }
         }
 
     }

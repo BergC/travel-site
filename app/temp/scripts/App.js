@@ -10338,11 +10338,18 @@ var _RevealOnScroll = __webpack_require__(3);
 
 var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
 
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//This is the ES6 way of importing JS objects from other JS files.
-var mobileMenu = new _MobileMenu2.default();
-var revealOnScroll = new _RevealOnScroll2.default();
+//Because we're not using jQuery in the two instances of our RevealOnScroll class, we should import it.
+
+var mobileMenu = new _MobileMenu2.default(); //This is the ES6 way of importing JS objects from other JS files.
+
+new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
+new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
 
 /***/ }),
 /* 2 */
@@ -10437,13 +10444,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //This allows us to easily have scroll events rather than having to code exactly when the features section should reveal.
 
 var RevealOnScroll = function () {
-    function RevealOnScroll() {
+    //The ordering below matters.  For instance, the this.offsetPercentage needs be above the createWaypoints method so that we can access it before running createWaypoints.
+    function RevealOnScroll(els, offset) {
         _classCallCheck(this, RevealOnScroll);
 
-        this.itemsToReveal = (0, _jquery2.default)(".feature-item");
+        this.itemsToReveal = els;
+        this.offsetPercentage = offset;
         this.hideInitially();
         this.createWaypoints();
     }
+
+    //This is used to hide the selected items initially so that they can be revealed on scroll.
+
 
     _createClass(RevealOnScroll, [{
         key: 'hideInitially',
@@ -10459,6 +10471,7 @@ var RevealOnScroll = function () {
     }, {
         key: 'createWaypoints',
         value: function createWaypoints() {
+            var that = this; //Because we want to use the offset variable included in the constructor function, we need to assign a variable to the this keyword.  We do this because if we try to access offsetPercentage below in the offset (e.g. this.offsetPercentage), the this keyword points to the Waypoint, not the constructor.
             this.itemsToReveal.each(function () {
                 var currentItem = this; //Outside of the new element below, the this keyword still points to the DOM element.  So we set some variable to the this keyword, then access that variable inside the Waypoint.
                 new Waypoint({ //Waypoint is already included in the waypoints npm package that was installed.
@@ -10466,7 +10479,7 @@ var RevealOnScroll = function () {
                     handler: function handler() {
                         (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
                     }, //The handler is what we want to happen once we reach that element.
-                    offset: "85%" //By default a waypoint handler occurs when the top of the DOM element reaches the top of the screen.  It has a default position of 0%.  So, if you want an item to reveal as it enters view (e.g. at the bottom) you can use offset, where 100% is the bottom of the page.
+                    offset: that.offsetPercentage //By default a waypoint handler occurs when the top of the DOM element reaches the top of the screen.  It has a default position of 0%.  So, if you want an item to reveal as it enters view (e.g. at the bottom) you can use offset, where 100% is the bottom of the page.
                 });
             });
         }

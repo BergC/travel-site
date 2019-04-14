@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<!-- This document utilizes the BEM methodology, so you will see frequent reuse of existing classes with either __ to indicate a new element or -- to indicate a new modifier. -->
+
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,7 +9,10 @@
   <title>Clear View Escapes</title>
   <meta name="keywords" content="Travel planning, travel bundles, travel escapes, affordable travel">
   <meta name="description" content="Your clarity. One trip away. We create soul restoring journeys that inspire you to be you.">
+  
   <link rel="stylesheet" href="temp/styles/styles.css">
+  <script src="/temp/scripts/Vendor.js"></script> <!-- Normally script imports go towards the bottom, but we want lazy loading to load as quickly as possible, right when the page loads. -->
+
 </head>
 <body>
   <header class="site-header">
@@ -56,17 +61,21 @@
     <div class="wrapper">
       <h2 class="headline headline--centered headline--light headline--b-margin-small">The first trip we planned <strong>was our own.</strong></h2>
       <h3 class="headline headline--centered headline--orange headline--small headline--narrow headline--light headline--b-margin-large">Ever since, we&rsquo;ve been working to make travel <strong>better for everyone.</strong></h3>
+
       <div class="wrapper wrapper--medium wrapper--b-margin">
-        <img sizes="(min-width: 970px) 976px, 100vw" srcset="assets/images/first-trip-low-res.jpg 565w, assets/images/first-trip.jpg 976w, assets/images/first-trip-hi-dpi.jpg 1952w" alt="Couple walking down a street.">
+        <img class="lazyload" sizes="(min-width: 970px) 976px, 100vw" data-srcset="assets/images/first-trip-low-res.jpg 565w, assets/images/first-trip.jpg 976w, assets/images/first-trip-hi-dpi.jpg 1952w" alt="Couple walking down a street.">
       </div>
+
       <div class="row row--gutters">
         <div class="row__medium-4 row__medium-4--larger row__b-margin-until-medium">
           <picture>
-            <source sizes="404px" srcset="assets/images/our-start.jpg 404w, assets/images/our-start-hi-dpi.jpg 808w" media="(min-width: 1020px)">
-            <source sizes ="320px" srcset="assets/images/our-start-portrait.jpg 382w, assets/images/our-start-portrait-hi-dpi.jpg 764w" media="(min-width: 800px)">
-            <img srcset="assets/images/our-start-landscape.jpg 800w, assets/images/our-start-landscape-hi-dpi.jpg 1600w" alt="Our founder, Jane Doe">
+            <!-- Notice in this instance we only have to give the class="lazyload" to the img tag, but we do need to add "data-" to each srcset. -->
+            <source sizes="404px" data-srcset="assets/images/our-start.jpg 404w, assets/images/our-start-hi-dpi.jpg 808w" media="(min-width: 1020px)">
+            <source sizes ="320px" data-srcset="assets/images/our-start-portrait.jpg 382w, assets/images/our-start-portrait-hi-dpi.jpg 764w" media="(min-width: 800px)">
+            <img class="lazyload" data-srcset="assets/images/our-start-landscape.jpg 800w, assets/images/our-start-landscape-hi-dpi.jpg 1600w" alt="Our founder, Jane Doe">
           </picture>
         </div>
+
         <div class="row__medium-8 row__medium-8--smaller">
           <div class="generic-content-container">
             <h2 class="headline headline--no-t-margin">Here&rsquo;s how we got started&hellip;</h2>
@@ -117,7 +126,7 @@
     </div>
   </div>
 
-  <div id="testimonials" class="page-section page-section--no-b-padding-until-large page-section--testimonials" data-matching-link="#testimonials-link">
+  <div id="testimonials" class="page-section page-section--no-b-padding-until-large page-section--testimonials lazyload" data-matching-link="#testimonials-link">
     <div class="wrapper wrapper--no-padding-until-large">
         <h2 class="section-title section-title--blue"><span class="icon icon--comment section-title__icon"></span>Real <strong>Testimonials</strong></h2>
     
@@ -125,7 +134,7 @@
           <div class="row__large-4">
             <div class="testimonial">
               <div class="testimonial__photo">
-                <img sizes="160px" srcset="assets/images/testimonial-jane.jpg 160w, assets/images/testimonial-jane-hi-dpi.jpg 320w" alt="Jane Doe">
+                <img class="lazyload" sizes="160px" data-srcset="assets/images/testimonial-jane.jpg 160w, assets/images/testimonial-jane-hi-dpi.jpg 320w" alt="Jane Doe"> <!-- We use a custom attribute instead of src or srcset so that the web browser doesn't immediately load it.  Then set a class of lazyload, and lazyloader will take care of converting it back to a src or srcset as needed. -->
               </div>
               <h3 class="testimonial__title">Jane Doe</h3>
               <h4 class="testimonial__subtitle">9 Time Escaper</h4>
@@ -136,7 +145,7 @@
           <div class="row__large-4">
             <div class="testimonial">
               <div class="testimonial__photo">
-                <img sizes="160px" srcset="assets/images/testimonial-john.jpg 160w, assets/images/testimonial-john-hi-dpi.jpg 320w" alt="John Smith">
+                <img class="lazyload" sizes="160px" data-srcset="assets/images/testimonial-john.jpg 160w, assets/images/testimonial-john-hi-dpi.jpg 320w" alt="John Smith">
               </div>
               <h3 class="testimonial__title">John Smith</h3>
               <h4 class="testimonial__subtitle">4 Time Escaper</h4>
@@ -147,7 +156,7 @@
           <div class="row__large-4">
             <div class="testimonial testimonial--last">
               <div class="testimonial__photo">
-                <img sizes="160px" srcset="assets/images/testimonial-cat.jpg 160w, assets/images/testimonial-cat-hi-dpi.jpg 320w" alt="Cat McKitty">
+                <img class="lazyload" sizes="160px" data-srcset="assets/images/testimonial-cat.jpg 160w, assets/images/testimonial-cat-hi-dpi.jpg 320w" alt="Cat McKitty">
               </div>
               <h3 class="testimonial__title">Cat McKitty</h3>
               <h4 class="testimonial__subtitle">6 Time Escaper</h4>

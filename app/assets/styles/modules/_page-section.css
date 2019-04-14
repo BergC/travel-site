@@ -30,8 +30,15 @@
         background-color: #E0E6EF;
 
         @mixin atLarge {
-            background: url("/assets/images/testimonials-bg.jpg") top center no-repeat;
-            background-size: cover;
+
+            /* 
+            The reason we target lazyloaded, rather than the class we added in HTML called lazyload is because once that section is scrolled to, the lazyloader functionality will automatically change the classed to lazyloaded.  Now we're only loaging the image once lazyloader has activated for this seciton.
+            */
+
+            &.lazyloaded {
+                background: url("/assets/images/testimonials-bg.jpg") top center no-repeat;
+                background-size: cover;
+            }
         }
     }
 

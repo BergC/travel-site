@@ -10,6 +10,7 @@ The benefit of ES6 classes is improved inheritence when using the "extend" funct
 
 class StickyHeader {
     constructor() {
+        this.lazyImages = $(".lazyload");
         this.siteHeader = $(".site-header");
         this.headerTriggerElement = $(".large-hero__title");
         this.createHeaderWaypoint(); //We call the createHeaderWaypoint in our constructor so that it's created as soon as the page loads.
@@ -17,6 +18,19 @@ class StickyHeader {
         this.headerLinks = $(".primary-nav a");
         this.createPageSectionWaypoints();
         this.addSmoothScrolling();
+        this.refreshWaypoints();
+    }
+
+    /*
+    This is where we will refresh the waypoints each time an image is lazy loaded so that our waypoints are correct.
+
+    To do this, we use a JS method called .on(), that's supplied two arguments.  The first is answering the question, "on what?"  The answer is, on load, so once it has loaded, then execute the second argument, which is a function that uses waypoints method refreshAll();
+    */
+
+    refreshWaypoints() {
+        this.lazyImages.on("load", function() {
+            Waypoint.refreshAll();
+        });
     }
 
     addSmoothScrolling() {

@@ -11307,6 +11307,7 @@ var StickyHeader = function () {
     function StickyHeader() {
         _classCallCheck(this, StickyHeader);
 
+        this.lazyImages = (0, _jquery2.default)(".lazyload");
         this.siteHeader = (0, _jquery2.default)(".site-header");
         this.headerTriggerElement = (0, _jquery2.default)(".large-hero__title");
         this.createHeaderWaypoint(); //We call the createHeaderWaypoint in our constructor so that it's created as soon as the page loads.
@@ -11314,9 +11315,22 @@ var StickyHeader = function () {
         this.headerLinks = (0, _jquery2.default)(".primary-nav a");
         this.createPageSectionWaypoints();
         this.addSmoothScrolling();
+        this.refreshWaypoints();
     }
 
+    /*
+    This is where we will refresh the waypoints each time an image is lazy loaded so that our waypoints are correct.
+      To do this, we use a JS method called .on(), that's supplied two arguments.  The first is answering the question, "on what?"  The answer is, on load, so once it has loaded, then execute the second argument, which is a function that uses waypoints method refreshAll();
+    */
+
     _createClass(StickyHeader, [{
+        key: 'refreshWaypoints',
+        value: function refreshWaypoints() {
+            this.lazyImages.on("load", function () {
+                Waypoint.refreshAll();
+            });
+        }
+    }, {
         key: 'addSmoothScrolling',
         value: function addSmoothScrolling() {
             this.headerLinks.smoothScroll();

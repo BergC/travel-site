@@ -1,0 +1,25 @@
+.social-icons {
+    text-align: center;
+
+    &__icon {
+        background-color: $mainOrange;
+        display: inline-block; /*This will cause all the social media icons to sit on the same line, but allow us to give them a custom height if we need to.*/
+        margin: 0 5px 5px 5px;
+        width: 33%;
+        height: 72px;
+        position: relative;
+
+        @mixin atSmall {
+            width: 72px;
+            margin: 0 5px;
+        }
+
+        .icon {
+            display: block; /*We're doing this so the width and height values from our sprite system are automatically applied to the block.*/
+            position: absolute; /*If we're making this element absolutely positioned, you need to tell its parent to be positioned relative.*/
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

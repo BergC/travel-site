@@ -2,6 +2,12 @@ import $ from 'jquery';
 import waypoints from '../../../../node_modules/waypoints/lib/noframework.waypoints';
 import smoothScroll from 'jquery-smooth-scroll';
 
+/*
+Classes are an ES6 introduction.  
+Here I am using the ES6 class capabilitis to create a constructor function.  
+The benefit of ES6 classes is improved inheritence when using the "extend" functionality.
+*/
+
 class StickyHeader {
     constructor() {
         this.siteHeader = $(".site-header");

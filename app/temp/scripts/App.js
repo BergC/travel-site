@@ -11109,14 +11109,19 @@ var _StickyHeader = __webpack_require__(5);
 
 var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
 
+var _Modal = __webpack_require__(7);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//This is the ES6 way of importing JS objects from other JS files.
-var mobileMenu = new _MobileMenu2.default(); //Because we're not using jQuery in the two instances of our RevealOnScroll class, we should import it.
+//Because we're not using jQuery in the two instances of our RevealOnScroll class, we should import it.
+var mobileMenu = new _MobileMenu2.default(); //This is the ES6 way of importing JS objects from other JS files.
 
 new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
 new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
 var stickyHeader = new _StickyHeader2.default();
+var modal = new _Modal2.default();
 
 /***/ }),
 /* 3 */
@@ -11210,6 +11215,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //This allows us to easily have scroll events rather than having to code exactly when the features section should reveal.
 
+/*
+Classes are an ES6 introduction.  
+Here I am using the ES6 class capabilitis to create a constructor function.  
+The benefit of ES6 classes is improved inheritence when using the "extend" functionality.
+*/
+
 var RevealOnScroll = function () {
     //The ordering below matters.  For instance, the this.offsetPercentage needs be above the createWaypoints method so that we can access it before running createWaypoints.
     function RevealOnScroll(els, offset) {
@@ -11285,6 +11296,12 @@ var _jquerySmoothScroll2 = _interopRequireDefault(_jquerySmoothScroll);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*
+Classes are an ES6 introduction.  
+Here I am using the ES6 class capabilitis to create a constructor function.  
+The benefit of ES6 classes is improved inheritence when using the "extend" functionality.
+*/
 
 var StickyHeader = function () {
     function StickyHeader() {
@@ -11735,6 +11752,86 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*
+Classes are an ES6 introduction.  
+Here I am using the ES6 class capabilitis to create a constructor function.  
+The benefit of ES6 classes is improved inheritence when using the "extend" functionality.
+*/
+
+var Modal = function () {
+    function Modal() {
+        _classCallCheck(this, Modal);
+
+        this.openModalButton = (0, _jquery2.default)(".open-modal");
+        this.modal = (0, _jquery2.default)(".modal");
+        this.closeModalButton = (0, _jquery2.default)(".modal__close");
+        this.events();
+    }
+
+    _createClass(Modal, [{
+        key: "events",
+        value: function events() {
+            // Clicking the open modal button.
+            this.openModalButton.click(this.openModal.bind(this));
+
+            // Clicking the X close modal button.
+            this.closeModalButton.click(this.closeModal.bind(this));
+
+            // Pushes any key and if escape then close modal.
+            (0, _jquery2.default)(document).keyup(this.keyPressHandler.bind(this));
+        }
+
+        /*
+        Because the methods below are being called in the event handler above rather than running directly, the "this" keyword no longer points towards the main class or object.  Instead it points to the new object being clicked.  To counter this, above we use the bind() method and set it to "this", so that each method continues to point towards the modal class.
+        */
+
+    }, {
+        key: "openModal",
+        value: function openModal() {
+            this.modal.addClass("modal--is-visible");
+            return false; // Because the Get in Touch button has an a href of #, on click it will scroll to the top of the screen, which we don't want.  We want someone to open the modal wherever they are on the page.  This return false stops that functionality.
+        }
+    }, {
+        key: "closeModal",
+        value: function closeModal() {
+            this.modal.removeClass("modal--is-visible");
+        }
+    }, {
+        key: "keyPressHandler",
+        value: function keyPressHandler(e) {
+            if (e.keyCode == 27) {
+                // 27 is they key board code for the escape key.
+                this.closeModal();
+            }
+        }
+    }]);
+
+    return Modal;
+}();
+
+exports.default = Modal;
 
 /***/ })
 /******/ ]);

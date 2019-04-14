@@ -1405,7 +1405,12 @@ Instead edit gulp/templates/sprite */
             font-size: 1rem;
             background-color: transparent
 
+            /*By using the & symbol we're saying select whatever has an <a> attribute, or link, then we're saying only select links with a class of is-current-link.*/
+
     }
+            .primary-nav a.is-current-link {
+                color: #FABB69;
+            }
     }
 
 .reveal-item {

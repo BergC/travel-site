@@ -42,7 +42,7 @@
 
             /*By using the & symbol AFTER our .site-header--dark class, we're saying that only when the --dark modifier class is active, select the __logo and apply this CSS.*/
             .site-header--dark & {
-                transform: scale(.57);
+                transform: scale(.56);
             }
         }
 

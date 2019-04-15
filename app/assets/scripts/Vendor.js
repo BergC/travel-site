@@ -10,3 +10,14 @@ To change this, we need to tell waypoints to refresh its measurements each time 
 
 See StickyHeader.js first method beneath the class creation for how this is fixed and additional info.
 */
+
+
+/* 
+Picturefill will ensure that older web browsers can still utilize our responsive images even though they don't support HTML tags such as picture or srcset.  
+
+All you have to do is import it here and you're done.
+*/
+
+import 'picturefill';
+
+import "../../temp/scripts/modernizr";

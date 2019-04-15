@@ -4,11 +4,11 @@ Instead edit gulp/templates/sprite */
 
 
     .icon {
-        background-image: url('/assets/images/sprites/sprite-e79e95cc.svg');
+        background-image: url('../../assets/images/sprites/sprite-e79e95cc.svg'); /* Similar to in the HTML doc, we remove the first forward slash because we don't want to go to the base of the current domain. */
     }
 
     .no-svg .icon {
-        background-image: url('/assets/images/sprites/sprite-e79e95cc.png');
+        background-image: url('../../assets/images/sprites/sprite-e79e95cc.png');
     }
 
 

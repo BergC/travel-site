@@ -36,7 +36,7 @@
             */
 
             &.lazyloaded {
-                background: url("/assets/images/testimonials-bg.jpg") top center no-repeat;
+                background: url("../../assets/images/testimonials-bg.jpg") top center no-repeat; /* Similar to in the HTML doc, we remove the first forward slash because we don't want to go to the base of the current domain. */
                 background-size: cover;
             }
         }
